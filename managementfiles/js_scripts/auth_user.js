@@ -46,14 +46,13 @@ document.addEventListener('DOMContentLoaded', function () {
 
       // Submit form via AJAX
       $.ajax({
-        url: 'http://localhost/WCSPortal/managementfiles/json_data/login.php', // Adjust your URL if needed
+        url: 'managementfiles/json_data/login.php', // Adjust your URL if needed
         method: 'POST',
         data: Object.fromEntries(formData.entries()),
         dataType: 'json',
         success: function (response) {
           const message = response.message;
           const data = response.data;
-
           if (message.includes('Success')) {
             toastr.success(data, 'Success');
             setTimeout(function () {

@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function () {
   
         // Send form data via AJAX
         $.ajax({
-          url: 'http://localhost/WCSPortal/managementfiles/php_scripts/createUser.php',
+          url: '../managementfiles/php_scripts/createUser.php',
           method: 'POST',
           data: formData, // Directly send FormData (not an object)
           contentType: false, // Important for file uploads
@@ -141,8 +141,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Reinitialize DataTable
     $('.userDatatable').DataTable({
-      ajax: {
-        url: 'http://localhost/WCSPortal/managementfiles/json_data/getUser.php',
+      ajax: {//WCSPortal/managementfiles/json_data/getUser.php
+        url: '../managementfiles/json_data/getUser.php',
         dataSrc: function (json) {
           if (!json || !json.data) {
             console.error('Invalid JSON response:', json);
