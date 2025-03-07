@@ -54,12 +54,34 @@
                         <div class="login-wrap">
                             <div class="login-content">
                                 <div class="login-contenthead text-center">
-                                    <h5>Login</h5>
+                                    <h5>Sign Up</h5>
                                 </div>
                                 <form id="formAuthentication">
                                     <div class="login-input">
+                                        <div class="row">
+                                        <div class="form-group">
+                                            <label>First Name</label>
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                placeholder="example@email.com">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Last Name</label>
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                placeholder="example@email.com">
+                                        </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Username</label>
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                placeholder="example@email.com">
+                                        </div>
                                         <div class="form-group">
                                             <label>E-mail</label>
+                                            <input type="text" class="form-control" id="username" name="username"
+                                                placeholder="example@email.com">
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Telephone</label>
                                             <input type="text" class="form-control" id="username" name="username"
                                                 placeholder="example@email.com">
                                         </div>
@@ -94,7 +116,7 @@
                                     </div>
                                 </form>
                                 <div class="signinform text-center">
-                                    <h4>Don't have an account? <a href="create_acc.php" class="hover-a">Sign Up</a></h4>
+                                    <h4>Don't have an account? <a href="index.php" class="hover-a">Sign in</a></h4>
                                 </div>
                             </div>
                         </div>
