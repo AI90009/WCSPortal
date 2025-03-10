@@ -90,7 +90,7 @@
                                         </div>
                                     </div>
                                     <div class="login-button">
-                                        <button name="submit" class="btn btn-login">Sign In</button>
+                                        <button name="submit" class="btn btn-login">Sign-in</button>
                                     </div>
                                 </form>
                                 <div class="signinform text-center">

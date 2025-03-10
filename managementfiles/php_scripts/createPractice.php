@@ -1,0 +1,54 @@
+<?php
+
+include("../php_scripts/functions.php");
+// Enable error reporting
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
+
+// Enable CORS
+header('Access-Control-Allow-Origin: *');
+header('Content-Type: application/json');
+header('Access-Control-Allow-Methods: POST');
+header('Access-Control-Allow-Headers: Content-Type, Authorization');
+
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+
+    $practice_name = validate($_POST['practice_name']);
+
+    $userID = $_SESSION['logged_user_id']['userid'];
+
+     // Prepare data for insertion
+     $data = [
+        'area' => $practice_name,
+        'userid' => $userID,
+    ];
+
+    $result = insert('practice_areas', $data);
+
+    if ($result) {
+        $response = array(
+            'message' => 'Success',
+            'data' => 'Practice has been added '
+        );
+    } else {
+        $response = array(
+            'message' => 'Error',
+            'data' => 'Something is not okay. Please try again. ' . mysqli_error($con)
+        );
+    }
+
+
+} else {
+    $response = array(
+        'message' => 'Error',
+        'data' => 'There is nothing to post. Thanks.'
+    );
+}
+
+echo json_encode($response);
+
+?>

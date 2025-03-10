@@ -33,80 +33,122 @@ document.addEventListener('DOMContentLoaded', function () {
             return emailPattern.test(email);
         }
   
-        // Validate Fields
-        const validations = [
-          //{ name: 'user_img', message: 'I dont see an image added for this user', type: 'file' },
-          { name: 'user_fullnames', message: 'Please enter Full Names' },
-          { name: 'usernames', message: 'Username will be used to Login' },
-          { name: 'user_email', message: 'Email is important....', type: 'email' },
-          { name: 'user_phone', message: 'Please enter user phone number' },
-          { name: 'user_pass', message: 'A password is a requirement' },
-          { name: 'user_cpass', message: 'Please confirm the password' },
-          { name: 'user_role', message: 'Please select a user role', type: 'select' },
-          //{ name: 'lawyer_specialization', message: 'Please select lawyer specialisation ', type: 'select' },
-          //{ name: 'lawyer_sub', message: 'Please select a practice practice sub-area', type: 'select' },
-          { name: 'user_state', message: 'Please select state of this user', type: 'radio' }
-        ];
+       // Validate Fields
+// Validate Fields
+const validations = [
+  { name: 'user_role', message: 'Please select a case category', type: 'select' },
+  { name: 'lawyer_sub', message: 'Please select a case sub-category', type: 'select' },
+  { name: 'choice_of_lawyer', message: 'Please select a lawyer', type: 'select' },
+  { name: 'appointment_date', message: 'Incorrect Date set', type: 'datetime' },
+  { name: 'description', message: 'Please enter a description', type: 'textarea' }
+];
+
+// Generic validation function
+const validateField = (validation) => {
+  const inputElement = document.getElementById(validation.name);
+  let value = inputElement ? inputElement.value.trim() : "";  // Trim value
+
+  // Check if the textarea is empty
+  if (!value) {
+    toastr.error(validation.message || "This field is required.");
+    return false;
+  }
+
+  console.log("Textarea Value:", value); 
+
+  // Specific validation based on the type of field
+  if (validation.type === 'textarea') {
+
+
+    console.log("Length of Textarea Value:", value.length);
+ 
+    // Example: Check if the value length is at least 10 characters
+    if (value.length < 10) {
+      toastr.error("Text must be at least 10 characters long.");
+      return false;
+    }
+
+    if (value.length > 500) {
+      toastr.error("Text must not be more than 500 characters long.");
+      return false;
+    }
+
+    // Example: Check for a specific regex pattern (no special characters)
+    const regex = /^[\s\S]*$/;  // Only letters and spaces
+    if (!regex.test(value)) {
+      toastr.error("Text can only contain letters, numbers and spaces.");
+      return false;
+    }
+  }
+
+  if (validation.type === 'select') {
+    // If the value is the default option (assuming 'default' is used for an unselected state)
+    if (value === 'default') {
+      toastr.error(validation.message);
+      return false;
+    }
+  }
+
+  if (validation.type === 'datetime') {
+    // For datetime fields, check if the value exists
+    if (!value) {
+      toastr.error("Please select a valid date and time.");
+      return false;
+    }
+
+    // Ensure input follows the correct format (YYYY-MM-DDTHH:mm)
+    const isoDatetimeRegex = /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}$/;
+    if (!isoDatetimeRegex.test(value)) {
+      toastr.error("Invalid date format. Expected YYYY-MM-DDTHH:mm.");
+      return false;
+    }
+
+    // Try to create a Date object to validate the date
+    const date = new Date(value);
+    if (isNaN(date.getTime())) {
+      toastr.error("The selected date is invalid.");
+      return false;
+    }
+  }
+
+  // If all validations pass, return true
+  return true;
+};
+
+// Example: Iterate through each field to validate
+const validateForm = () => {
+  for (const validation of validations) {
+    if (!validateField(validation)) {
+      return false; // Stop validation if any field fails
+    }
+  }
   
-        // Loop through validations and check for missing values
-        for (const validation of validations) {
-          const value = formData.get(validation.name);
-      
-          if (validation.type === 'file') {
-            // Special handling for file inputs
-            const fileInput = document.querySelector('input[name="user_img"]');
-            if (!value || !(value instanceof File) || value.size === 0) {
-              // If no image, set a default image (default.jpg)
-              formData.set('user_img', 'user-06.jpg');
-            }
-          }  // Handle select inputs
-          else if (validation.type === 'select') {
-            if (!value || value === 'default') {
-              toastr.error(validation.message);
-              return; // Stop further validation
-            }
-          } else if (validation.type === 'radio') {
-            // Special handling for radio buttons
-            const radioButton = document.querySelector('input[name="user_state"]:checked');
-            if (!radioButton) {
-              toastr.error(validation.message);
-              return; // Stop further validation if no radio button is selected
-            }
-          }else if (validation.type === 'email') {
-            // Email validation
-            if (!value || !value.trim()) {
-                toastr.error('Email is important....');
-                return; // Stop further validation if email is empty
-            } else if (!isValidEmail(value)) {
-                toastr.error('Please enter a valid email address.');
-                return; // Stop further validation if email is invalid
-            }
-        }else if (validation.name === 'user_cpass') {
-            // Password mismatch check
-            const password = formData.get('user_pass');
-            const confirmPassword = formData.get('user_cpass');
-            if (!confirmPassword || !confirmPassword.trim()) {
-                toastr.error('Please confirm the password.');
-                return; // Stop further validation if confirm password is empty
-            } else if (password !== confirmPassword) {
-                toastr.error('Passwords do not match.');
-                return; // Stop further validation
-            }
-        }else {
-              // General validation for other input types
-              if (!value?.trim()) {
-                  toastr.error(validation.message);
-                  return; // Stop further validation
-              }
-          }
-        }
+  // If all validations passed, proceed
+  toastr.success("Form is valid!");
+  return true;
+};
+
+// Loop through validations and check for missing values
+for (const validation of validations) {
+  const value = formData.get(validation.name);
+  if (!validateField(validation, value)) {
+    return; // Stop further validation
+  }
+}
+// Loop through validations and check for missing values
+for (const validation of validations) {
+  const value = formData.get(validation.name);
+  if (!validateField(validation, value)) {
+    return; // Stop further validation
+  }
+}
   
         // Disable form fields before AJAX submission 
         toggleFormFields(campaignForm, true);
   
         // Send form data via AJAX
         $.ajax({
-          url: '../managementfiles/php_scripts/createUser.php', 
+          url: '../managementfiles/php_scripts/confirmBooking.php',
           method: 'POST',
           data: formData, // Directly send FormData (not an object)
           contentType: false, // Important for file uploads
@@ -133,7 +175,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
   
- 
+
   // Initialize DataTable
     $(document).ready(function () {
     // Destroy any existing DataTable instance
@@ -144,7 +186,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Reinitialize DataTable
     $('.userDatatable').DataTable({
       ajax: {//WCSPortal/managementfiles/json_data/getUser.php
-        url: '../managementfiles/json_data/getUser.php',
+        url: '../managementfiles/json_data/getAppointments.php',
         dataSrc: function (json) {
           if (!json || !json.data) {
             console.error('Invalid JSON response:', json);
@@ -158,13 +200,13 @@ document.addEventListener('DOMContentLoaded', function () {
           toastr.error('An error occurred while fetching registered.');
         }
       },
-      columns: [
+      columns: [ 
         { data: 'id' },
-        { data: 'recordedBy' },
-        { data: 'phone' },
-        { data: 'role' },
-        { data: 'fullnamed' },
-        { data: 'date' },
+        { data: 'desc' },
+        { data: 'prac_area' },
+        { data: 'subPrac_area' },
+        { data: 'client' },
+        { data: 'lawyer' },
         {
           data: null,
           render: function (data, type, row) {

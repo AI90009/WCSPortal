@@ -56,63 +56,65 @@
                                 <div class="login-contenthead text-center">
                                     <h5>Sign Up</h5>
                                 </div>
-                                <form id="formAuthentication">
+                                <form id="form_sign_up">
                                     <div class="login-input">
                                         <div class="row">
-                                        <div class="form-group">
-                                            <label>First Name</label>
-                                            <input type="text" class="form-control" id="username" name="username"
-                                                placeholder="example@email.com">
-                                        </div>
-                                        <div class="form-group">
-                                            <label>Last Name</label>
-                                            <input type="text" class="form-control" id="username" name="username"
-                                                placeholder="example@email.com">
-                                        </div>
+                                            <div class="form-group">
+                                                <label>Title</label>
+                                                <select class="select" id="client_title" name="client_title">
+                                                    <option value="default">Please set your title</option>
+                                                    <option value="Mr.">Mr.</option>
+                                                    <option value="Ms.">Ms.</option>
+                                                    <option value="Mrs.">Mrs.</option>
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <label>First Name</label>
+                                                <input type="text" class="form-control" id="first_name"
+                                                    name="first_name" placeholder="John">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Last Name</label>
+                                                <input type="text" class="form-control" id="last_name" name="last_name"
+                                                    placeholder="Doe">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Gender</label>
+                                                <select class="select" id="client_sex" name="client_sex">
+                                                    <option value="default">Please set your gender</option>
+                                                    <option value="Male">Male</option>
+                                                    <option value="Female">Female</option>
+                                                </select>
+                                            </div>
                                         </div>
                                         <div class="form-group">
                                             <label>Username</label>
-                                            <input type="text" class="form-control" id="username" name="username"
-                                                placeholder="example@email.com">
+                                            <input type="text" class="form-control" id="userzid" name="userzid"
+                                                placeholder="jane_doe">
                                         </div>
                                         <div class="form-group">
                                             <label>E-mail</label>
-                                            <input type="text" class="form-control" id="username" name="username"
-                                                placeholder="example@email.com">
+                                            <input type="text" class="form-control" id="user_email" name="user_email"
+                                                placeholder="john@doe.com">
                                         </div>
                                         <div class="form-group">
                                             <label>Telephone</label>
-                                            <input type="text" class="form-control" id="username" name="username"
-                                                placeholder="example@email.com">
+                                            <input type="text" class="form-control" id="user_tel" name="user_tel"
+                                                placeholder="0293******12">
                                         </div>
                                         <div class="form-group">
                                             <div class="d-flex justify-content-between">
                                                 <label>Password</label>
                                             </div>
                                             <div class="pass-group">
-                                                <input type="password" id="password" name="password"
+                                                <input type="password" id="user_pass" name="user_pass"
                                                     class="form-control pass-input" placeholder="********">
                                                 <span class="fas toggle-password fa-eye-slash"></span>
                                             </div>
                                         </div>
-                                        <div class="filter-checkbox m-0">
-                                            <ul class="d-flex justify-content-between">
-                                                <li>
-                                                    <label class="checkboxs">
-                                                        <input type="checkbox">
-                                                        <span><i></i></span>
-                                                        <b class="check-content">Remember Me</b>
-                                                    </label>
-                                                </li>
-                                                <li>
-                                                    <a class="forgot-link" href="">Forgot
-                                                        password?</a>
-                                                </li>
-                                            </ul>
-                                        </div>
                                     </div>
                                     <div class="login-button">
-                                        <button name="submit" class="btn btn-login">Sign In</button>
+                                        <button name="submit" class="btn btn-login">Create Account</button>
                                     </div>
                                 </form>
                                 <div class="signinform text-center">

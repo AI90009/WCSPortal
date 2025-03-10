@@ -12,7 +12,7 @@ include('../php_scripts/functions.php');
 
 // Fetch data
 //$userPhotos = getAll('wc_users'); 
-$userPhotos = mysqli_query($con,"select * from wc_users where userrole!='Lawyer' order by id");
+$userPhotos = mysqli_query($con,"select * from wc_users where userrole='Lawyer' order by id");
 
 $json_array = array();
 
@@ -26,10 +26,17 @@ if ($userPhotos && mysqli_num_rows($userPhotos) > 0) {
 
         $userByID = getById('wc_users',$userPhotosItem['createdby']);
 
+
+        //practice area name
+        $practiceByID = getById('practice_areas',$userPhotosItem['practice_area']);
+
+        //practice sub-area name
+        $sub_practiceByID = getById('sub_area',$userPhotosItem['sub_practice']);
+
         $formattedAppeal = array(
             "id" => $counta,
             "phone" => $userPhotosItem['contact'],
-            "role" => $userPhotosItem['userrole'],
+            "role" => $practiceByID['data']['area'].' <br> &emsp;  '.$sub_practiceByID['data']['sub_area'],
             "recordedBy" => '<div class="table-namesplit">
                         <a href="javascript:void(0);" class="table-profileimage">
                             <img src="../assets/img/user1.png" class="me-2" alt="img">

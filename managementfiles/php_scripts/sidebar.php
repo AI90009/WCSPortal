@@ -23,7 +23,16 @@ $clinicsystem = 'clinic_system.php';
 $contactsystem = 'contact_system.php';
 $futuresystem = 'future_system.php';
 $legalsystem = 'legal_system.php';
-
+$appointments = 'appointments.php';
+$nappointments = 'new_appointment.php';
+$practical_area = 'practical_areas.php';
+$newPractical_area = 'new_practical_area.php';
+$client_tag = 'client_tags.php';
+$newClient_tag = 'newClient_tag.php';
+$sub_areas = 'sub_areas.php';
+$newSub_area = 'newSub_area.php';
+$lawyers = 'manage_lawyers.php';
+$reg_clients = 'registered_clients.php';
 ?>
  <!-- Header -->
  <div class="header">
@@ -208,6 +217,19 @@ $legalsystem = 'legal_system.php';
                          <span>Manage users</span>
                      </a>
                  </li>
+                 <li>
+                     <a href="manage_lawyers.php" class="<?php if($pageName==$lawyers){echo "active";} ?>"><i
+                             class="fe fe-user"></i>
+                         <span>Lawyers</span>
+                     </a>
+                 </li>
+
+                 <li>
+                     <a href="registered_clients.php" class="<?php if($pageName==$reg_clients){echo "active";} ?>"><i
+                             class="fe fe-users"></i>
+                         <span>Clients</span>
+                     </a>
+                 </li>
 
                  <?php } ?>
 
@@ -215,30 +237,16 @@ $legalsystem = 'legal_system.php';
                      <h6>Legal System</h6>
                  </li>
                  <li>
-                     <a href="legal_system.php" class=""><i
-                             class="fe fe-home"></i>
+                     <a href="legal_system.php" class=""><i class="fe fe-home"></i>
                          <span>Legal Dashboard</span>
                      </a>
                  </li>
                  <li>
-                     <a href="legal_system.php" class=""><i
+                     <a href="appointments.php"
+                         class="<?php if($pageName==$appointments || $pageName==$nappointments){echo "active";} ?>"><i
                              class="fe fe-file"></i>
                          <span>Appointment</span>
                      </a>
-                 </li>
-                 <li class="submenu">
-                     <a href="javascript:void(0);"><i class="fe fe-users"></i>
-                         <span>Clients</span>
-                         <span class="menu-arrow"><i class="fe fe-chevron-right"></i></span>
-                     </a>
-                     <ul>
-                         <li>
-                             <a href="">New Client</a>
-                         </li>
-                         <li>
-                             <a href="">Manage clients</a>
-                         </li>
-                     </ul>
                  </li>
                  <li>
                      <a href="" class=""><i class="fe fe-briefcase"></i> <span>New Case</span></a>
@@ -339,24 +347,23 @@ $legalsystem = 'legal_system.php';
                      </a>
                      <ul>
                          <li>
-                             <a href="">Legal Practice Areas</a>
+                             <a href="practical_areas.php"
+                                 class="<?php if($pageName==$practical_area || $pageName==$newPractical_area){echo "active";} ?>">Legal
+                                 Practice Areas</a>
                          </li>
                          <li>
-                             <a href="">Legal Practice Sub-Areas</a>
+                             <a href="sub_areas.php"
+                                 class="<?php if($pageName==$sub_areas || $pageName==$newSub_area){echo "active";} ?>">Legal
+                                 Practice Sub-Areas</a>
                          </li>
                          <li>
-                             <a href="">Client Tags/Labels</a>
+                             <a href="client_tags.php"
+                                 class="<?php if($pageName==$client_tag || $pageName==$newClient_tag){echo "active";} ?>">Client
+                                 Tags/Labels</a>
                          </li>
                      </ul>
                  </li>
-                 <li>
-                     <a href="chat.php" class="<?php if($pageName==$chat){echo "active";} ?>"><i
-                             class="fe fe-message-square"></i> <span>Chat</span></a>
-                 </li>
-                 <li>
-                     <a href="" class=""><i
-                             class="fe fe-slack"></i> <span>System Logs</span></a>
-                 </li>
+
                  <li class="menu-title">
                      <h6>Others</h6>
                  </li>
@@ -375,6 +382,13 @@ $legalsystem = 'legal_system.php';
                              class="fe fe-phone-outgoing"></i>
                          <span>Contact Systems</span>
                      </a>
+                 </li>
+                 <li>
+                     <a href="chat.php" class="<?php if($pageName==$chat){echo "active";} ?>"><i
+                             class="fe fe-message-square"></i> <span>Chat</span></a>
+                 </li>
+                 <li>
+                     <a href="" class=""><i class="fe fe-slack"></i> <span>System Logs</span></a>
                  </li>
              </ul>
          </div>

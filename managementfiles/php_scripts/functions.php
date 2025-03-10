@@ -15,8 +15,8 @@ function validate($inputData) {
         throw new Exception("Database connection is invalid.");
     }
 
-    // Trim whitespace
-    $inputData = trim($inputData);
+    // Ensure inputData is a string before trimming
+    $inputData = is_string($inputData) ? trim($inputData) : '';
 
     // Escape special characters for SQL
     $validatedData = mysqli_real_escape_string($con, $inputData);
@@ -24,6 +24,7 @@ function validate($inputData) {
     // Return the validated data
     return $validatedData;
 }
+
 
 //Redirect from one page to another with a status message
 function redirect($url, $status){

@@ -11,8 +11,7 @@ include('../php_scripts/functions.php');
 }*/
 
 // Fetch data
-//$userPhotos = getAll('wc_users'); 
-$userPhotos = mysqli_query($con,"select * from wc_users where userrole!='Lawyer' order by id");
+$userPhotos = getAll('clients'); 
 
 $json_array = array();
 
@@ -23,24 +22,22 @@ if ($userPhotos && mysqli_num_rows($userPhotos) > 0) {
     //$recordBy = validate($_SESSION['loggedInUser']['userid']);
 
     foreach ($userPhotos as $userPhotosItem) {
-
-        $userByID = getById('wc_users',$userPhotosItem['createdby']);
-
         $formattedAppeal = array(
             "id" => $counta,
-            "phone" => $userPhotosItem['contact'],
-            "role" => $userPhotosItem['userrole'],
+            "phone" => $userPhotosItem['telphone'],
+            "gender" => $userPhotosItem['gender'],
             "recordedBy" => '<div class="table-namesplit">
                         <a href="javascript:void(0);" class="table-profileimage">
                             <img src="../assets/img/user1.png" class="me-2" alt="img">
                         </a>
                         <a href="javascript:void(0);" class="table-name">
-                            <span>'.$userPhotosItem['fullnames'].'</span>
+                            <span>'.$userPhotosItem['title'].' '.$userPhotosItem['first_name'].' '.$userPhotosItem['last_name'].'</span>
                             <p>'.$userPhotosItem['email'].'</p>
                         </a>
                     </div>', // Assuming userid is what you want to show
             
-            "fullnamed" => $userByID['data']['fullnames'],
+            "status" => $userPhotosItem['status'],
+            "usera" => $userPhotosItem['username'],
             "date" => date('d M, Y', strtotime($userPhotosItem['date_created']))
         );
         $counta++;
